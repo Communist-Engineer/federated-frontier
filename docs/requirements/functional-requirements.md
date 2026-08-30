@@ -1,0 +1,14 @@
+# Functional requirements
+
+| ID | Normative statement | Rationale/source | Priority | Verification | Dependencies | Status |
+|---|---|---|---|---|---|---|
+| FFI-FUNC-001 | A worker **MUST** register an authenticated identity, software measurement, hardware inventory, network class, policy constraints, and supported job types. | Scheduling and trust cannot rely on self-reported GPU names alone. | P0 | Registration contract tests | FFI-SEC-001 | Proposed |
+| FFI-FUNC-002 | The scheduler **MUST** match jobs on capacity, topology, trust, data policy, software compatibility, locality, and current load. | A FLOP-only market produces unsafe and inefficient placements. | P0 | Placement test matrix | FFI-SYS-005 | Proposed |
+| FFI-FUNC-003 | A training island **MUST** report local token counts, outer-step lineage, update hash, metrics, and checkpoint parent. | DiLoCo-style aggregation needs weighted, traceable updates. | P0 | Update schema validation | FFI-TRAIN-002 | Proposed |
+| FFI-FUNC-004 | The control plane **MUST** support artifact states `candidate`, `quarantined`, `validated`, `signed`, `promoted`, `revoked`, and `retired`. | Prevents unverified artifacts from becoming authority. | P0 | State-machine tests | FFI-SYS-006 | Proposed |
+| FFI-FUNC-005 | Rollout workers **MUST** return policy version, environment version, seed or episode identifier, transcript hash, reward evidence, and verifier outputs. | Enables stale-policy correction, deduplication, and fraud detection. | P0 | Trajectory contract tests | FFI-RL-002 | Proposed |
+| FFI-FUNC-006 | The system **MUST** deduplicate semantically identical work and content-identical artifacts before contribution accounting. | Replication is useful only when deliberate. | P0 | Duplicate-injection tests | FFI-VERIFY-004 | Proposed |
+| FFI-FUNC-007 | Operators **MUST** be able to revoke identity, workload eligibility, dataset eligibility, checkpoint, and signing material without rewriting history. | Required for incident response and deletion obligations. | P0 | Revocation drill | FFI-SEC-008 | Proposed |
+| FFI-FUNC-008 | Experiments **MUST** export a reproducibility manifest containing commit, containers, checkpoints, dataset hashes, hyperparameters, seeds, hardware, topology, network profile, times, logs, metrics, artifacts, and verification status. | Reproducibility is a scientific requirement. | P0 | Manifest schema audit | FFI-SCI-001 | Accepted |
+| FFI-FUNC-009 | A contributor **SHOULD** receive an explanation of accepted, rejected, discounted, or quarantined work. | Supports audit, dispute resolution, and incentive integrity. | P1 | Accounting acceptance tests | FFI-GOV-003 | Proposed |
+| FFI-FUNC-010 | The system **MAY** support privacy-classed inference provided routing and logging enforce the declared class. | Useful serving may span edge and trusted regions. | P2 | Privacy routing tests | FFI-INF-005 | Proposed |
